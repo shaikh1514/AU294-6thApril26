@@ -1,0 +1,20 @@
+---
+  - name: testing copy
+    hosts: dbservers
+    vars:
+      file: ansible.cfg
+    tasks:
+      - name: copy the file
+        ansible.builtin.copy:
+          src: "{{ file }}"
+          dest: /home/student/ansible.cfg
+          owner: student
+          group: devops
+          mode: '660'
+          setype: nfs_t
+
+      - name: create file 
+        ansible.builtin.copy:
+          content: "This file created using ansible"
+          dest: /home/student/april.txt
+          owner: student

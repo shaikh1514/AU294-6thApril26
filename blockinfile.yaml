@@ -1,0 +1,12 @@
+---
+  - name: blockinfile
+    hosts: serverc
+    tasks:
+      - name: add bloick of data
+        ansible.builtin.blockinfile:
+          path: /home/student/ansible.cfg
+          block: |
+            This Block of Data has
+            been added by Ansible
+            blockinfile module
+          state: present

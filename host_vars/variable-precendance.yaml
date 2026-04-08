@@ -1,0 +1,15 @@
+---
+  - name: variable precedence
+    hosts: appservers
+    vars_files:
+      - myvariable.yaml
+    tasks:
+      - name: print the tech value
+        ansible.builtin.debug:
+          msg: "Hello, We are learning {{ tech }}"
+
+      - name: proint another valu
+        ansible.builtin.debug:
+          msg: "We are not learning {{tech}}"
+        vars:
+          tech: Hardware

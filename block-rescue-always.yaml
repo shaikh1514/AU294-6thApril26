@@ -1,0 +1,26 @@
+---
+  - name: testing block, rescue and always
+    hosts: serverb
+    tasks:
+      - name: block section
+        block:
+          - name: blocck-task-1
+            ansible.builtin.debug:
+              msg: This is block-task-1
+          - name: block-task-2
+            ansible.builtin.debug:
+              msgg: This is block-task-2
+          - name: block task 3
+            ansible.builtin.command:
+              cmd: whoami
+        rescue:
+          - name: rescue-task
+            ansible.builtin.debug:
+              msg: "this is rescue task"
+        always:
+          - name: always task
+            ansible.builtin.service:
+              name: httpd
+              state: restarted
+
+

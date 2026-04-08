@@ -1,0 +1,9 @@
+---
+  - name: pull the folder
+    hosts: servera
+    tasks:
+      - name: pull the folder from remote
+        ansible.posix.synchronize:
+          src: /home/student
+          dest: backup-files/
+          mode: pull

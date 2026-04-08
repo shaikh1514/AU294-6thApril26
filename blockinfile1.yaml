@@ -1,0 +1,16 @@
+---
+  - name: blockinfile
+    hosts: serverc
+    tasks:
+      - name: add bloick of data
+        ansible.builtin.blockinfile:
+          path: /home/student/ansible.cfg
+          block: |
+            This Block of Data has
+            been added by Ansible
+            blockinfile module but using
+            marker option
+          state: present
+          marker: "#{mark} CUSTOM BLOCK"
+          marker_begin: "ANSIBLE START"
+          marker_end: "ANSIBLE END"

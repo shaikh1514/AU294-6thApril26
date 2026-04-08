@@ -1,0 +1,13 @@
+---
+  - name: find module
+    hosts: serverc
+    tasks:
+      - name: search file
+        ansible.builtin.find:
+          paths: /var/log
+          patterns: "*.log"
+        register: result
+
+      - name: print
+        debug:
+          var: result

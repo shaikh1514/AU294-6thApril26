@@ -1,0 +1,25 @@
+---
+- name: First play
+  hosts: servera
+  tasks:
+    - name: First task - create folder
+      ansible.builtin.file: #module to create folder
+        path: /home/devops/ansible2 # perameters to create folder
+        state: directory
+
+    - name: Second-task
+      ansible.builtin.copy:
+        content: "Hello This file also create using Ansible"
+        dest: /home/devops/ansible2/example.txt
+
+    - name: Third task
+      ansible.builtin.debug:
+        msg: Hello the name is {{ ansible_facts['hostname'] }}
+  
+  - name: seccond play
+    hosts: serverb.lab.example.com, serverd.lab.example.com
+    tasks:
+      - name: installing package
+        ansible.builtin.dnf:
+          name: httpd
+          state: latest

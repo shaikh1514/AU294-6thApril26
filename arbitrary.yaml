@@ -1,0 +1,11 @@
+---
+  - name: testing arbitrary modules
+    hosts: servera
+    tasks:
+      - name: create folder using command module
+        ansible.builtin.command:
+          cmd: "mkdir /home/student/arbitray"
+
+      - name: create file
+        command:
+          cmd: "touch /home/student/arbitray/new.txt" 

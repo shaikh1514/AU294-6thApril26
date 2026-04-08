@@ -1,0 +1,8 @@
+---
+  - name: testing sync module
+    hosts: servera
+    tasks:
+      - name: sync folder to rmeote machine
+        ansible.posix.synchronize:
+          src: host_vars
+          dest: /home/student

@@ -1,0 +1,17 @@
+---
+  - name: creating custom variable
+    hosts: webservers
+    tasks:
+      - name: set custom facts
+        ansible.builtin.set_fact:
+          mypkg: "{{ ansible_facts['devices']['sda']['size'] }}"
+
+      - name: set another facts
+        ansible.builtin.set_fact:
+          yourpkg: "{{ ansible_facts['ansible_local']['custom'] }}"
+
+      - name: print the facts
+        ansible.builtin.debug:
+          var: yourpkg
+
+      - 

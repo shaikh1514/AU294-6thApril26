@@ -1,0 +1,11 @@
+tech: Kubernetes
+cars:
+  - model: Toyota
+    built: 2020
+    color: red
+  - model: BMW
+    built: 2021
+    color: Blue
+  - model: Audi
+    built: 2022
+    color: White

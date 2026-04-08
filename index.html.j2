@@ -1,0 +1,5 @@
+<html><h1> This webserver belongs to {{ ansible_facts['hostname'] }} and its FQDN is {{ ansible_facts['fqdn'] }} </h1></html>
+
+<html><h1> ip add of this machine is {{ ansible_facts['default_ipv4']['address'] }} </h1></html>
+
+<html><h1> Bios Version of this machine is {{ ansible_facts['bios_version'] }} and avaiable memory is {{ ansible_facts.memtotal_mb }} MB and avaible disk size is {{ ansible_facts.devices.sda.size }} </h1></html>

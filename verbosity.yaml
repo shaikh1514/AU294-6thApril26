@@ -1,0 +1,12 @@
+---
+  - name: testing verbosity
+    hosts: servera
+    tasks:
+      - name: print the facts
+        ansible.builtin.debug:
+          msg: "meminfo of servera is {{ ansible_facts['memfree_mb'] }}"
+        register: apple
+
+      - name: print apple
+        ansible.builtin.debug:
+          var: apple

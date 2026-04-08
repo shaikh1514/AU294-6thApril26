@@ -1,0 +1,9 @@
+---
+  - name: lineinfile
+    hosts: serverc
+    tasks:
+      - name: add data
+        ansible.builtin.lineinfile:
+          path: /home/student/ansible.cfg
+          line: "Welcome to the Ansible Training"
+          state: present

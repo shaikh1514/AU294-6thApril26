@@ -1,0 +1,33 @@
+---
+  - name: create custom facts for servera
+    hosts: servera
+    vars:
+      remote_folder: /etc/ansible/facts.d
+      file: servera.fact
+    tasks:
+      - name: create folder
+        ansible.builtin.file:
+          path: "{{ remote_folder }}"
+          state: directory
+
+      - name: copy the file
+        ansible.builtin.copy:
+          src: "{{ file }}"
+          dest: "{{ remote_folder }}/{{ file }}"
+          
+  - name: create custom facts for serverb
+    hosts: serverb
+    vars:
+      remote_folder: /etc/ansible/facts.d
+      file: serverb.fact
+    tasks:
+      - name: create folder
+        ansible.builtin.file:
+          path: "{{ remote_folder }}"
+          state: directory
+
+      - name: copy the file
+        ansible.builtin.copy:
+          src: "{{ file }}"
+          dest: "{{ remote_folder }}/{{ file }}"
+          

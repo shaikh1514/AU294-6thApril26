@@ -1,0 +1,23 @@
+---
+  - name: testing error
+    hosts: serverd
+    ignore_errors: true
+    force_handlers: true
+    tasks:
+      - name: task-1
+        ansible.builtin.command:
+          cmd: whoami
+        notify: apple
+
+      - name: task-2
+        ansible.builtin.command:
+          cmd: notacmd
+
+      - name: task-3
+        ansible.builtin.command:
+          cmd: hostname
+          
+    handlers:
+      - name: apple
+        debug:
+          msg: This is Handler Task

@@ -1,0 +1,28 @@
+---
+  - name: print variable
+    hosts: dbservers
+    vars:
+      message: "This is created using Variable"
+      destination: "/home/student/variable"
+      file1: "myfile.txt"
+    tasks:
+      - name: create folder at {{ destionation }}
+        ansible.builtin.file:
+          path: "{{ destination }}"
+          state: directory
+
+      - name: create file
+        ansible.builtin.file:
+          path: "{{ destination }}/{{ file1 }}"
+          state: touch
+
+      - name: add a data
+        ansible.builtin.copy:
+          content: "{{ message }}"
+          dest: "{{ destination }}/{{ file1 }}"
+  
+      - name: print the value
+        ansible.builtin.debug:
+          msg: the message is {{ message }}
+        vars:
+          message: "IPL 2026"

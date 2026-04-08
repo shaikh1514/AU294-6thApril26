@@ -1,0 +1,8 @@
+---
+  - name: testing filters
+    hosts: servera
+    tasks:
+      - name: print the facts
+        ansible.builtin.copy:
+          content: "{{ ansible_facts | to_nice_json }}"
+          dest: /home/student/facts.json

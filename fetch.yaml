@@ -1,0 +1,14 @@
+---
+  - name: fething the data
+    hosts: dbservers
+    tasks:
+      - name: fetch log files
+        ansible.builtin.fetch:
+          src: /var/log/secure
+          dest: log-files/backup
+
+      - name: copy the host file
+        ansible.builtin.fetch:
+          src: /etc/hosts
+          dest:  log-files/backup-host
+          flat: true

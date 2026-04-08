@@ -1,0 +1,7 @@
+---
+  - name: printing facts
+    hosts: serverc
+    tasks:
+      - name: print facts
+        ansible.builtin.debug:
+          msg: "The name of host is {{ ansible_hostname }} and ip add is {{ ansible_default_ipv4.address }}. The storage avaible is {{ ansible_devices.sda.size }}"

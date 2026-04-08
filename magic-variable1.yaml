@@ -1,0 +1,20 @@
+---
+  - name: testing inventory_hostname
+    hosts: appservers
+    tasks:
+      - name: print the hostname
+        ansible.builtin.debug:
+          msg: This task is executing at {{ inventory_hostname }}
+
+      - name: print the group name
+        ansible.builtin.debug:
+          msg: "The host {{ inventory_hostname }} is part of group {{ group_names }}"
+
+      - name: print the groupinfo
+        ansible.builtin.debug:
+          msg: "The group Appservers has members {{ groups['appservers'] }}"
+
+      - name: print the serverd disk size
+        ansible.builtin.debug:
+          msg: "Serverd has avaible disk size {{ hostvars['serverd']['ansible_facts']['devices']['sda']['size'] }}"
+

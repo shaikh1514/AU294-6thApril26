@@ -1,0 +1,45 @@
+---
+  - name: configure webserver
+    hosts: appservers
+    tasks:
+      - name: installing package
+        ansible.builtin.dnf:
+          name: 
+            - httpd
+            - firewalld
+          state: latest
+
+      - name: starting service
+        ansible.builtin.service:
+          name: "{{ item }}"
+          state: started
+          enabled: true
+        loop:
+          - httpd
+          - firewalld
+
+      - name: configure webpage
+        ansible.builtin.template:
+          src: index.html.j2
+          dest: /var/www/html/index.html
+        notify: restart_webserver
+        
+      - name: force handlers
+        ansible.builtin.meta: flush_handlers
+
+      - name: configuring firewall
+        ansible.posix.firewalld:
+          service: http
+          state: enabled
+          permanent: true
+          immediate: true
+
+    handlers:
+      - name: restart_webserver
+        ansible.builtin.systemd_service:
+          name: httpd
+          state: restarted
+
+      - name: handler2
+        ansible.builtin.debug:
+          msg: "Hello this is handler2 tasks"

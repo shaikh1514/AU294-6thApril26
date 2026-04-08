@@ -1,0 +1,10 @@
+---
+  - name: creating directory in student account
+    hosts: servera
+    remote_user: student
+    become: true
+    tasks:
+      - name: creating file
+        ansible.builtin.file:
+          path: /home/student/example2.txt
+          state: touch

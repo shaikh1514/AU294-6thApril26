@@ -1,0 +1,9 @@
+---
+  - name: lineinfile
+    hosts: serverc
+    tasks:
+      - name: replcae data
+        ansible.builtin.replace:
+          path: /home/student/ansible.cfg
+          regexp: "Welcome to the Openshift Training"
+          replace: "Training Completed"

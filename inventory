@@ -1,0 +1,19 @@
+workstation.lab.examle.com
+
+[webservers]
+servera ansible_host=servera.lab.example.com tech=docker
+serverb ansible_host=serverb.lab.example.com tech=podman
+
+[webservers:vars]
+tech=java
+
+[dbservers]
+serverc ansible_host=serverc.lab.example.com tech=containerD
+serverd ansible_host=serverd.lab.example.com tech=messos
+
+[dbservers:vars]
+tech=python
+
+[appservers:children]
+webservers
+dbservers

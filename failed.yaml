@@ -1,0 +1,13 @@
+---
+  - name: failed task demo
+    hosts: serverc
+    tasks:
+      - name: executing cmd
+        ansible.builtin.command:
+          cmd: whoami
+        failed_when: inventory_hostname == 'serverb'
+
+      - name: print a msg
+        ansible.builtin.debug:
+          msg: "This is demonstration of failed_when"
+        failed_when: inventory_hostname is in groups['dbservers']

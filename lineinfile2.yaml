@@ -1,0 +1,11 @@
+---
+  - name: lineinfile
+    hosts: serverc
+    tasks:
+      - name: changing data
+        ansible.builtin.lineinfile:
+          path: /home/student/ansible.cfg
+          regexp: "Welcome to the Ansible Training"
+          line: "Welcome to the Openshift Training"
+          state: present
+          backup: true

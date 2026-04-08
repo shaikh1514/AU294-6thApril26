@@ -1,0 +1,9 @@
+---
+  - name: store facts
+    hosts: appservers
+    tasks:
+      - name: download the facts
+        ansible.builtin.copy:
+          content: "{{ ansible_facts | to_nice_json }}"
+          dest: "{{ inventory_hostname }}-facts.json"
+        delegate_to: localhost

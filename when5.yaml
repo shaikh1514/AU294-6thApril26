@@ -1,0 +1,18 @@
+---
+  - name: testing when with register
+    hosts: serverb
+    tasks:
+      - name: eecute a cmd
+        command:
+          cmd: date
+        register: banana
+      
+      - name: print the banana value
+        ansible.builtin.debug:
+          var: banana
+
+      - name: condition
+        ansible.builtin.systemd_service:
+          name: sshd
+          state: restarted
+        when: banana['rc'] == 1

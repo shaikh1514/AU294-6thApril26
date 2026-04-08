@@ -1,0 +1,12 @@
+---
+  - name: testing when
+    hosts: serverc
+    tasks:
+      - name: print avaible memory
+        debug:
+          msg: the total memory is {{ ansible_facts['memtotal_mb'] }}
+      - name: download the package
+        ansible.builtin.dnf:
+          name: httpd
+          state: latest
+        when: ansible_facts['memtotal_mb'] < 2000

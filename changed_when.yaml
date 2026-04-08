@@ -1,0 +1,25 @@
+---
+  - name: testing changed_when
+    hosts: serverb
+    tasks:
+      - name: executing cmd
+        ansible.builtin.command:
+          cmd: whoami
+        changed_when: inventory_hostname  == 'serverb'
+
+      - name: creating file
+        ansible.builtin.file:
+          path: /home/student/apple.txt
+          state: touch
+        changed_when: false
+
+      - name: print a msg
+        ansible.builtin.debug:
+          msg: This is Example of changed_when
+        changed_when: true
+        notify: banana
+
+    handlers:
+      - name: banana
+        ansible.builtin.debug:
+          msg: This is handlers

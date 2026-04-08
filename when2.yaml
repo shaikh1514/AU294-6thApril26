@@ -1,0 +1,14 @@
+---
+  - name: testing when based on variable
+    hosts: serverb
+    vars:
+      month: jan
+    tasks:
+      - name: copy the data
+        ansible.builtin.copy:
+          src: inventory
+          dest: /home/student/inventory
+          user: student
+          group: student
+          mode: '660'
+        when: month is not defined

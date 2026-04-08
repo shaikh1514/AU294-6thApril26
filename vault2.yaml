@@ -1,0 +1,9 @@
+---
+  - name: copy envrypted file
+    hosts: serverb
+    tasks:
+      - name: copy the file
+        ansible.builtin.copy:
+          src: secret.yaml
+          dest: /home/student/secret.yaml
+          descrypt: true

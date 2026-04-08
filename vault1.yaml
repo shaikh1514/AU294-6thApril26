@@ -1,0 +1,13 @@
+---
+  - name: dictornary variable
+    hosts: servera
+    vars_files:
+      - myvariable.yaml
+      - secret.yaml
+    tasks:
+      - name: print the car info
+        debug:
+          msg: "The car brand is {{ cars[1].model }}, car model is {{ cars[1]['built'] }} and the color is {{cars[1]['color']}}"
+      - name: print the database info
+        debug:
+          msg: "The database username is {{ mysql_username }} password is {{ mysql_password }} database name is {{ mysql_database }} and root password is {{  mysql_root_password }}"

@@ -1,0 +1,8 @@
+---
+  - name: deploy host file using jinja  
+    hosts: appservers
+    tasks:
+      - name: deploy filemusing template
+        ansible.builtin.template:
+          src: hosts.j2
+          dest: /home/student/hosts

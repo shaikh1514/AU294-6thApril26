@@ -1,0 +1,10 @@
+---
+  - name: dictornary variable
+    hosts: servera
+    vars_files:
+      - myvariable.yaml
+    tasks:
+      - name: print the car info
+        debug:
+          msg: "The car brand is {{ item.model }}, car model is {{ item['built'] }} and the color is {{item['color']}}"
+        loop: "{{ cars }}"

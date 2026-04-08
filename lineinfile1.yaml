@@ -1,0 +1,10 @@
+---
+  - name: lineinfile
+    hosts: serverc
+    tasks:
+      - name: add specefic data at line
+        ansible.builtin.lineinfile:
+          path: /home/student/ansible.cfg
+          insertbefore: "Welcome to the Ansible Training"
+          line: "This line added by lineinfile module"
+          state: present

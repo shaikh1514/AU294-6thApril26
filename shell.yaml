@@ -1,0 +1,7 @@
+---
+  - name: testing shell module
+    hosts: servera
+    tasks:
+      - name: testing shell module
+        ansible.builtin.shell:
+          cmd: "timedatectl > /home/student/arbitray/new.txt"

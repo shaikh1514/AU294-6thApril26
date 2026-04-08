@@ -1,0 +1,8 @@
+---
+  - name: testing when condition
+    hosts: servera
+    tasks:
+      - name: execute the cmd
+        command:
+          cmd: whoami
+        when: inventory_hostname != 'serverb'
