@@ -1,0 +1,12 @@
+---
+  - name: import_task_1
+    ansible.builtin.debug:
+      msg: This is importing tasks-1, Tasks starts
+
+  - name: import_task-2
+    ansible.builtin.command:
+      cmd: whoami
+
+  - name: import_task-3
+    ansible.builtin.debug:
+      msg: This is task-3. Tasks end

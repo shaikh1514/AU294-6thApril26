@@ -1,0 +1,10 @@
+---
+  - name: include-task-1
+    ansible.builtin.debug:
+      msg: This is the include tasks-1
+
+  - name: include-tasks2
+    ansible.builtin.debug:
+      msg: The month is {{ month }}
+    vars:
+      month: April

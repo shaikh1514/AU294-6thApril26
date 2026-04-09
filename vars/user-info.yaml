@@ -1,0 +1,16 @@
+---
+  users:
+    - name: mohit
+      department: backup
+    - name: vaibhav
+      department: backup
+    - name: dewashish
+      department: network
+    - name: priyanka
+      department: network
+    - name: sachin
+      department: database
+    - name: shirley
+      department: database
+    - name: kumaresan
+      department: admin

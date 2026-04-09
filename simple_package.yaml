@@ -1,0 +1,8 @@
+---
+  - name: install simple package
+    hosts: webservers
+    tasks:
+      - name: install simple package
+        ansible.builtin.dnf:
+          name: simple-agent
+          state: latest

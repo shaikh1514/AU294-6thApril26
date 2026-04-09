@@ -1,0 +1,11 @@
+---
+  - name: testing importing playbook
+    hosts: serverd
+    tasks:
+      - name: importing task demo
+        ansible.builtin.import_tasks: tasks/import.yaml
+      
+      - name: include task demo
+        ansible.builtin.include_tasks: tasks/include.yaml
+        vars:
+          month: december

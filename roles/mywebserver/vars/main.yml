@@ -1,0 +1,6 @@
+---
+# vars file for mywebserver
+pkg1: httpd
+pkg2: firewalld
+svc1: httpd
+svc2: firewalld

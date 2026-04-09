@@ -1,0 +1,5 @@
+---
+  - name: configure webserver using roles
+    hosts: dbservers
+    roles:
+      - role: mywebserver

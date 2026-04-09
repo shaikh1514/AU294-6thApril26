@@ -1,0 +1,7 @@
+---
+  - src: https://github.com/arillso/ansible.motd.git
+    scm: git
+  - src: buluma.httpd
+    name: httpd-role
+  - src: file:///home/student/Downloads/ansible-role-php-master.tar
+    name: php-role

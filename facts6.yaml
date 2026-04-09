@@ -1,0 +1,7 @@
+---
+  - name: getting date and time
+    hosts: servera
+    tasks:
+      - name: print date and time
+        ansible.builtin.debug:
+          var: ansible_facts

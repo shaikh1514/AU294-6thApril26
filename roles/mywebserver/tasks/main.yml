@@ -1,0 +1,27 @@
+---
+# tasks file for mywebserver
+  - name: installing packages
+    ansible.builtin.dnf:
+      name:
+        - "{{ pkg1 }}"
+        - "{{ pkg2 }}"
+      state: latest
+  - name: start service
+    ansible.builtin.systemd_service:
+      name: "{{ item }}"
+      state: started
+      enabled: true
+    loop:
+      - "{{ svc1 }}"
+      - "{{ svc2 }}"
+  - name: configure webpage
+    ansible.builtin.template:
+      src: index.j2
+      dest: /var/www/html/index.html
+    notify: webserver
+  - name: configure firewall
+    ansible.posix.firewalld:
+      service: "{{ svc3 }}"
+      state: enabled
+      immediate: true
+      permanent: true

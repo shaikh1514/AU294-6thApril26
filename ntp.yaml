@@ -1,0 +1,11 @@
+---
+  - name: configuring ntp using systemroles
+    hosts: appservers
+    vars:
+      timesync_ntp_servers:
+        - hostname: 0.in.pool.ntp.org
+          iburst: yes
+        - hostname: time.google.com
+          iburst: yes
+    roles:
+      - redhat.rhel_system_roles.timesync

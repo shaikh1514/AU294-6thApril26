@@ -1,0 +1,10 @@
+---
+  - name: testing importing playbook
+    hosts: serverd
+    tasks:
+      - name: print ip add
+        ansible.builtin.debug:
+          msg: The ip add of this machine is {{ ansible_facts['default_ipv4']['address'] }}
+
+  - name: imported playbook 
+    ansible.builtin.import_playbook: variable2.yaml

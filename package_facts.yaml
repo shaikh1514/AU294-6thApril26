@@ -1,0 +1,20 @@
+---
+  - name: package facts
+    hosts: serverb
+    tasks:
+      - name: collect package facts
+        ansible.builtin.package_facts:
+
+      - name: list httpd installed package
+        ansible.builtin.debug:
+          var: ansible_facts['packages']['httpd']
+
+      - name: install autofs package
+        ansible.builtin.dnf:
+          name: autofs
+          state: latest
+        when: ansible_facts['packages']['autofs'] is not defined
+
+      - name: check autofs packages
+        ansible.builtin.debug:
+          var: ansible_facts['packages']['autofs']

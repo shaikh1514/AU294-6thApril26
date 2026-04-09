@@ -1,0 +1,10 @@
+---
+# tasks file for april-role
+  - name: role-task-1
+    ansible.builtin.debug:
+      msg: This is roles tasks
+
+  - name: role-task-2
+    ansible.builtin.command:
+      cmd: whoami
+    notify: role-handler

@@ -1,0 +1,4 @@
+<html><h1> This webserver belongs to {{ ansible_facts['hostname'] }} and its FQDN is {{ ansible_facts['fqdn'] }} </h1></html>
+
+<html> ip add of this machine is {{ ansible_facts['default_ipv4']['address'] }} </html>
+<html> Current time is: {{ ansible_facts['date_time']['iso8601'] }} </html>

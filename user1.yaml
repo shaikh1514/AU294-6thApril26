@@ -1,0 +1,13 @@
+---
+  - name: generate ssh keys and create groups
+    hosts: workstation.lab.example.com
+    vars_files:
+      - vars/user-info.yaml
+    tasks:
+      - name: generate keys
+        ansible.builtin.user:
+          name: "{{ item['name'] }}"
+          generate_ssh_key: true
+          ssh_key_bits: 2048
+          ssh_key_file: "/home/student/git-repos/ansible/user-keys/{{ item.name }}"
+        loop: "{{ users }}"

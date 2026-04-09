@@ -1,0 +1,31 @@
+---
+  - name: tesitng roles and tasks
+    hosts: serverb
+    pre_tasks:
+      - name: pre_tasks_demo
+        ansible.builtin.debug:
+          msg: This is Pre_tasks
+        changed_when: true
+        notify: pre_task_handler
+    tasks:
+      - name: general-task-1
+        ansible.builtin.command:
+          cmd: lsblk
+        notify: general-handler
+    roles:
+      - role: april-role
+    post_tasks:
+      - name: post task demo
+        ansible.builtin.command:
+          cmd: hostnamectl
+        notify: post_task_handler
+    handlers:
+      - name: general-handler
+        debug:
+          msg: This is general task handler
+      - name: pre_task_handler
+        debug:
+          msg: This is Pre tasks handlers
+      - name: post_task_handler
+        debug:
+          msg: This is post tasks handlers

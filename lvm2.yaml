@@ -1,0 +1,31 @@
+---
+  - name: create lvm using roles
+    hosts: serverd
+    vars:
+      storage_pools:
+        - name: nokia-vg
+          type: lvm
+          disks:
+            - /dev/sdb
+          volumes:
+            - name: lv01
+              size: 500m
+              mount_point: "/mnt/disk1"
+              fs_type: xfs
+              state: present
+            - name: lv02
+              size: 437m
+              mount_point: "/mnt/disk2"
+              fs_type: ext4
+              state: present
+    pre_tasks:
+      - name: creating folder
+        ansible.builtin.file:
+          path: "{{ item }}"
+          state: directory
+        loop:
+          - /mnt/disk1
+          - /mnt/disk2
+          
+    roles:
+      - redhat.rhel_system_roles.storage

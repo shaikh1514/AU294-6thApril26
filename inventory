@@ -1,4 +1,4 @@
-workstation.lab.examle.com
+workstation.lab.example.com
 
 [webservers]
 servera ansible_host=servera.lab.example.com tech=docker

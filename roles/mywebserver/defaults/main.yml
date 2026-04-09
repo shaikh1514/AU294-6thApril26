@@ -1,0 +1,7 @@
+---
+# defaults file for mywebserver
+pkg1: http
+pkg2: firewall
+svc1: https
+svc2: firewallds
+svc3: http

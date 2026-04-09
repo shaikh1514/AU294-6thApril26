@@ -1,0 +1,6 @@
+---
+# handlers file for mywebserver
+  - name: webserver
+    ansible.builtin.service:
+      name: "{{ svc1 }}"
+      state: restarted

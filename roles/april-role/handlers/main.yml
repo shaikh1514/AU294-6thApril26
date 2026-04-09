@@ -1,0 +1,5 @@
+---
+# handlers file for april-role
+  - name: role-handler
+    ansible.builtin.debug:
+      msg: This is Roles' handlers tasks

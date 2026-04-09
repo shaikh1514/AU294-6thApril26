@@ -1,0 +1,12 @@
+---
+  - name: adding a repo for simple-agent package
+    hosts: appservers
+    tasks:
+      - name: adding a repo
+        ansible.builtin.yum_repository:
+          name: simple-agent-repo
+          description: "to install simple-agent package"
+          baseurl: http://serverb.lab.example.com/yum/repository/
+          gpgcheck: true
+          gpgkey: http://serverb.lab.example.com/yum/repository/RPM-GPG-KEY-example
+          enabled: true

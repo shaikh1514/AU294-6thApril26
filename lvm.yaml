@@ -1,0 +1,52 @@
+---
+  - name: creating partition
+    hosts: serverc
+    tasks:
+      - name: creating 1st partition
+        community.general.parted:
+          device: /dev/sdb
+          number: 1
+          state: present
+          label: gpt
+          flags: lvm
+          part_start: 0%
+          part_end: 50%
+      - name: creating 2nd partition
+        community.general.parted:
+          device: /dev/sdb
+          number: 2
+          state: present
+          label: gpt
+          flags: lvm
+          part_start: 51%
+          part_end: 100%
+
+      - name: create volume group
+        community.general.lvg:
+          vg: vg-nokia
+          pvs: ['/dev/sdb1', '/dev/sdb2']
+          pesize: 16
+
+      - name: create logical volume
+        community.general.lvol:
+          vg: vg-nokia
+          lv: lv-nokia
+          size: 2g
+          force: yes
+
+      - name: assigning filesystem
+        community.general.filesystem:
+          fstype: ext4
+          dev: /dev/vg-nokia/lv-nokia
+
+      - name: creat mount point
+        ansible.builtin.file:
+          path: /mnt/lvm
+          state: directory
+
+      - name: mount the device
+        ansible.posix.mount:
+          path: /mnt/lvm
+          src: /dev/vg-nokia/lv-nokia
+          fstype: ext4
+          state: mounted
