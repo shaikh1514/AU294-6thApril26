@@ -1,0 +1,12 @@
+---
+  - name: user network role to assign ip add
+    hosts: serverb
+    vars:
+      network_connections:
+        - name: ens4
+          type: ethernet
+          ip:
+            address:
+              - 192.168.10.1/27
+    roles:
+      - redhat.rhel_system_roles.network

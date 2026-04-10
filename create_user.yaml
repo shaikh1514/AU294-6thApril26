@@ -1,0 +1,61 @@
+---
+  - name: create group and users
+    hosts: appservers
+    vars_files:
+      - user-info.yaml
+      - password.yaml
+    tasks:
+      - name: create group
+        ansible.builtin.group:
+          name: "{{ item.department }}"
+          state: present
+        loop: "{{ users }}"
+
+      - name: create user for backup group
+        ansible.builtin.user:
+          name: "{{ item.name }}"
+          groups: "{{ item.department }}"
+          password: "{{ backup_pass | password_hash('sha512') }}"
+        loop: "{{ users }}"
+        when: item.department == 'backup'
+
+      - name: create user for database group
+        ansible.builtin.user:
+          name: "{{ item.name }}"
+          groups: "{{ item.department }}"
+          password: "{{ database_pass | password_hash('sha512') }}"
+        loop: "{{ users }}"
+        when: item.department == 'database'
+
+      - name: create user for network group
+        ansible.builtin.user:
+          name: "{{ item.name }}"
+          groups: "{{ item.department }}"
+          password: "{{ network_pass | password_hash('sha512') }}"
+        loop: "{{ users }}"
+        when: item.department == 'network'
+
+
+      - name: create user for admin group
+        ansible.builtin.user:
+          name: "{{ item.name }}"
+          groups: "{{ item.department }}"
+          password: "{{ admin_pass | password_hash('sha512') }}"
+        loop: "{{ users }}"
+        when: item.department == 'admin'
+
+      - name: adding ssh keys for users
+        ansible.posix.authorized_key:
+          user: "{{ item['name'] }}"
+          key: "{{ lookup('ansible.builtin.file', '/tmp/ssh-keys/'+ item.name + '.pub') }}"
+        loop: "{{ users }}"
+
+      - name: configure sudo access
+        ansible.builtin.lineinfile:
+          path: /etc/sudoers.d/{{ item.name }}
+          state: present
+          create: yes
+          mode: '0440'
+          line: "%{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+          validate: /usr/sbin/visudo -cf %s
+        loop: "{{ users }}"

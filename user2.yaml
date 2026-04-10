@@ -1,0 +1,26 @@
+---
+  - name: create user
+    hosts: appservers
+    vars_files:
+      - vars/user-info.yaml
+      - vars/password.yaml
+    tasks:
+      - name: create group
+        ansible.builtin.group:
+          name: "{{ item.department }}"
+          state: absent
+        loop: "{{ users }}"
+
+      - name: create users
+        ansible.builtin.user:
+          name: "{{ item.name }}"
+          state: absent
+          groups: "{{ item.department }}"
+          password: "{{ backup_pass | password_hash('sha512') }}"
+        loop: "{{ users }}"
+
+      - name: modify sudo access
+        ansible.builtin.file:
+          path: /etc/sudoers.d/{{ item.name }}
+          state: absent
+        loop: "{{ users }}"

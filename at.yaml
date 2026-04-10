@@ -1,0 +1,10 @@
+---
+  - name: executing task using at module
+    hosts: servera
+    tasks:
+      - name: copy the file
+        ansible.posix.at:
+          command: cp -rf /etc/hosts /tmp/temp-host.txt
+          count: 3
+          units: minutes
+          unique: true

@@ -1,17 +1,18 @@
 ---
-  - name: generate ssh keys and create groups
+  - name: generating ssh keys
     hosts: localhost
     vars_files:
-      - vars/user-info.yaml
+     - user-info.yaml
     tasks:
-      - name: create folder
+      - name: create directory for ssh keys
         ansible.builtin.file:
-          path: /tmp/keys1
+          path: /tmp/ssh-keys
           state: directory
+      
       - name: generate keys
         ansible.builtin.user:
-          name: "{{ item['name'] }}"
+          name: "{{ item.name }}"
           generate_ssh_key: true
           ssh_key_bits: 2048
-          ssh_key_file: "/tmp/keys1/{{ item.name }}"
+          ssh_key_file: "/tmp/ssh-keys/{{ item.name }}"
         loop: "{{ users }}"

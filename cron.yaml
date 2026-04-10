@@ -1,0 +1,10 @@
+---
+  - name: cron jobs
+    hosts: serverb
+    tasks:
+      - name: execute cmd using cron
+        ansible.builtin.cron:
+          name: generate logger
+          minute: "*/2"
+          hour: "*"
+          job: "/usr/bin/logger 'We are Learning Ansible'" 
